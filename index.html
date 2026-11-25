@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="visually-hidden-focusable" href="#contenido">Saltar al contenido</a>
+
+  <header>
+    <nav class="navbar navbar-dark barra-minono">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">MINONO | Panaderia y Pasteleria</a>
+        <div class="d-flex align-items-center gap-2">
+          <span class="text-white small d-none" id="saludo"></span>
+          <button class="btn btn-outline-light btn-sm d-none" id="btn-salir" onclick="cerrarSesionCliente()">SALIR</button>
+          <button class="btn btn-light" onclick="irAMiPedido()">INICIAR SESION</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido">
+
+    <section class="hero">
+      <div class="container">
+        <h1>¿Esperas tu café?</h1>
+        <p>Ve el estado de tu pedido</p>
+        <div id="mensajes-inicio"></div>
+        <form class="row justify-content-center" onsubmit="buscarPedidoPorDni(event)">
+          <div class="col-sm-8 col-md-5">
+            <label for="dni-inicio" class="visually-hidden">DNI</label>
+            <div class="input-group">
+              <input type="text" id="dni-inicio" class="form-control" placeholder="Escribe tu DNI" maxlength="8" inputmode="numeric">
+              <button type="submit" class="btn btn-light">Buscar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="container py-5" id="catalogo">
+      <h2 class="titulo-seccion">Nuestro catálogo</h2>
+      <div id="mensajes"></div>
+
+      <div class="row mb-3">
+        <div class="col-md-5 mb-3">
+          <label for="buscador" class="form-label">Buscar producto</label>
+          <input type="search" id="buscador" class="form-control" placeholder="Ejemplo: latte" oninput="filtrarProductos()">
+        </div>
+        <div class="col-md-7 mb-3">
+          <p class="form-label mb-2">Categorías</p>
+          <button class="btn-categoria activa" data-categoria="Todas" onclick="filtrarCategoria('Todas')">Todas</button>
+          <button class="btn-categoria" data-categoria="Bebidas frías" onclick="filtrarCategoria('Bebidas frías')">Bebidas frías</button>
+          <button class="btn-categoria" data-categoria="Bebidas calientes" onclick="filtrarCategoria('Bebidas calientes')">Bebidas calientes</button>
+          <button class="btn-categoria" data-categoria="Jugos" onclick="filtrarCategoria('Jugos')">Jugos</button>
+          <button class="btn-categoria" data-categoria="Cookies" onclick="filtrarCategoria('Cookies')">Cookies</button>
+          <button class="btn-categoria" data-categoria="Salados" onclick="filtrarCategoria('Salados')">Salados</button>
+          <button class="btn-categoria" data-categoria="Dulces" onclick="filtrarCategoria('Dulces')">Dulces</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12" id="zona-catalogo">
+          <div class="row" id="lista-productos"></div>
+        </div>
+
+        <aside class="col-lg-3 d-none" id="zona-carrito">
+          <div class="mini-carrito card card-body">
+            <h2 class="h5">Tu carrito</h2>
+            <div id="mini-lista"></div>
+            <p class="fs-5 mb-2">Total: <span class="precio" id="mini-total">S/ 0.00</span></p>
+            <a class="btn btn-minono" href="vista/carrito.html">Ver carrito</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="seccion-beige py-5" id="como-funciona">
+      <div class="container">
+        <h2 class="titulo-seccion">¿Cómo hacer un pedido?</h2>
+        <div class="row">
+          <article class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <h3 class="h5">1. Elige</h3>
+                <p>Busca en la carta de bebidas, jugos, cookies, salados y dulces. Ves el precio de cada producto.</p>
+              </div>
+            </div>
+          </article>
+          <article class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <h3 class="h5">2. Personaliza</h3>
+                <p>Escoge el tamaño, el tipo de leche, el azúcar y los extras. El precio se actualiza solo.</p>
+              </div>
+            </div>
+          </article>
+          <article class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <h3 class="h5">3. Confirma</h3>
+                <p>Revisa tu carrito, completa tus datos y recibe un código único para tu pedido.</p>
+              </div>
+            </div>
+          </article>
+          <article class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <h3 class="h5">4. Sigue tu pedido</h3>
+                <p>Mira si está pendiente, en preparación o listo. El pago se hace con el personal al recogerlo.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal fade" id="modal-producto" tabindex="-1" aria-labelledby="modal-titulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4" id="modal-titulo"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div id="mensajes-modal"></div>
+          <p id="modal-descripcion"></p>
+          <div id="modal-opciones"></div>
+          <div class="mb-3">
+            <label for="opcion-cantidad" class="form-label">Cantidad</label>
+            <input type="number" id="opcion-cantidad" class="form-control" min="1" max="10" value="1" oninput="recalcularPrecio()">
+          </div>
+          <div class="mb-3">
+            <label for="opcion-observacion" class="form-label">Observación (máximo 100 caracteres)</label>
+            <textarea id="opcion-observacion" class="form-control" maxlength="100" rows="2" placeholder="Ejemplo: sin hielo"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <span class="precio me-auto" id="modal-precio">Total: S/ 0.00</span>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-minono" onclick="agregarAlCarrito()">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pie-minono">
+    <div class="container">
+      <p class="mb-1">Cafetería MINONO · Panaderia y Pasteleria</p>
+      <p class="mb-0 small">Horario de atención: 6:30 a.m. - 10:00 p.m.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="modelo/reglas.js"></script>
+  <script src="modelo/producto.js"></script>
+  <script src="modelo/carrito.js"></script>
+  <script src="modelo/cliente.js"></script>
+  <script src="vista/vistaComun.js"></script>
+  <script src="vista/vistaMenu.js"></script>
+  <script src="controlador/controladorSesion.js"></script>
+  <script src="controlador/controladorInicio.js"></script>
+  <script src="controlador/controladorMenu.js"></script>
+</body>
+</html>

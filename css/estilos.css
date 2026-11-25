@@ -1,0 +1,298 @@
+@font-face {
+  font-family: 'Neue Haas Display';
+  src: url('../fuentes/NeueHaasDisplayRoman.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Haas Display';
+  src: url('../fuentes/NeueHaasDisplayBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --marron: #794B32;
+  --marron-oscuro: #3A231C;
+  --caramelo: #CBA17D;
+  --crema: #F9F0EB;
+  --negro: #201A19;
+  --acento: #794B32;
+  --fondo-pagina: #F9F0EB;
+  --texto: #201A19;
+}
+
+body {
+  font-family: 'Neue Haas Display', Arial, sans-serif;
+  background-color: var(--fondo-pagina);
+  color: var(--texto);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Neue Haas Display', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.titulo-seccion {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.barra-minono {
+  background-color: var(--marron);
+}
+
+.barra-minono .navbar-brand {
+  font-family: 'Neue Haas Display', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero {
+  background-color: var(--marron);
+  color: #ffffff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+.seccion-beige {
+  background-color: var(--caramelo);
+}
+
+.btn-minono {
+  background-color: var(--marron);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+.btn-minono:hover {
+  background-color: var(--marron-oscuro);
+  color: #ffffff;
+}
+
+.btn-minono:disabled {
+  background-color: #8c7b7b;
+  color: #ffffff;
+}
+
+.btn-categoria {
+  background-color: transparent;
+  color: var(--acento);
+  border: 2px solid var(--acento);
+  border-radius: 8px;
+  padding: 6px 14px;
+  margin: 0 4px 6px 0;
+}
+
+.btn-categoria:hover, .btn-categoria.activa, .btn-categoria.active {
+  background-color: var(--marron);
+  color: #ffffff;
+  border-color: var(--marron);
+}
+
+.btn-categoria:disabled {
+  background-color: transparent;
+  color: var(--acento);
+  border-color: var(--acento);
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#btn-letra {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--marron);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1040;
+}
+
+#btn-letra:hover {
+  background-color: var(--marron-oscuro);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--caramelo);
+  outline-offset: 2px;
+}
+
+.producto-card {
+  overflow: hidden;
+}
+
+.producto-img {
+  height: 190px;
+  background-color: var(--caramelo);
+}
+
+.producto-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.producto-nombre {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.precio.producto-precio {
+  font-size: 1.4rem;
+  white-space: nowrap;
+}
+
+.precio {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--acento);
+}
+
+.mini-carrito {
+  position: sticky;
+  top: 16px;
+}
+
+.mini-item {
+  border-bottom: 1px solid #cccccc;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+.btn-mas {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  font-size: 2rem;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.codigo-grande {
+  font-family: 'Neue Haas Display', Arial, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+  background-color: var(--caramelo);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.completada {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.pasos {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.paso {
+  flex: 1;
+  text-align: center;
+  padding: 10px 4px;
+  border-bottom: 6px solid #bbbbbb;
+  font-size: 0.9rem;
+}
+
+.paso.hecho {
+  border-bottom-color: #2E7D32;
+  font-weight: 700;
+}
+
+.paso.hecho::before {
+  content: "✔ ";
+}
+
+.paso.actual {
+  border-bottom-color: var(--caramelo);
+  font-weight: 700;
+}
+
+.aviso-listo {
+  background-color: #2E7D32;
+  color: #ffffff;
+  font-size: 1.3rem;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.columna-pedidos {
+  min-height: 220px;
+  background-color: var(--caramelo);
+  padding: 10px;
+  border-radius: 8px;
+  border-top: 6px solid gray;
+}
+
+.col-pendiente { border-top-color: #B3261E; }
+.col-preparacion { border-top-color: #B26A00; }
+.col-listo { border-top-color: #2E7D32; }
+
+.codigo-pedido {
+  letter-spacing: 2px;
+}
+
+.tarjeta-pedido {
+  margin-bottom: 10px;
+}
+
+.tarjeta-pedido.nuevo {
+  box-shadow: 0 0 0 3px var(--marron-oscuro);
+}
+
+.caja-grafico {
+  position: relative;
+  height: 260px;
+}
+
+.tarjeta-numero {
+  text-align: center;
+}
+
+.tarjeta-numero .numero {
+  font-family: 'Neue Haas Display', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--acento);
+}
+
+.pagina-login {
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.pie-minono {
+  background-color: var(--marron);
+  color: #ffffff;
+  padding: 24px 0;
+  margin-top: 48px;
+  text-align: center;
+}
+
+.pie-minono a {
+  color: #ffffff;
+}
